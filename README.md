@@ -7,7 +7,7 @@ so that I don't have to click the button every three months. It also renews itse
 
 Automation is powered by Python Selenium, running a headless chrome browser.
 
-The module a really simple interface to navigate the browser, with a function for renewing tasks and a function for renewing web apps:
+The module offers a really simple interface to navigate the browser, with a function for renewing tasks and a function for renewing web apps:
 
 ```python
 # Renews a task (NOTE: only tested on accounts that have a single task configured.)
