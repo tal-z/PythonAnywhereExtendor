@@ -1,6 +1,5 @@
 
 import os
-import time
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -11,6 +10,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from dotenv import load_dotenv
 
 load_dotenv()
+
 
 # Instantiate browser session with custom options, removing automation flags in chrome
 options = webdriver.ChromeOptions()
@@ -32,12 +32,13 @@ def renew_task(user_varname: str, password_varname: str):
     username = driver.find_element(by=By.ID, value="id_auth-username")
     pwd = driver.find_element(by=By.ID, value="id_auth-password")
     nxt = driver.find_element(by=By.ID, value="id_next")
-    username.send_keys(os.getenv(user_varname))
+    user = os.getenv(user_varname)
+    username.send_keys(user)
     pwd.send_keys(os.getenv(password_varname))
     nxt.click()
 
     # Navigate to tasks tab
-    driver.get("https://www.pythonanywhere.com/user/talzakenautorenew/tasks_tab/")
+    driver.get(f"https://www.pythonanywhere.com/user/{user}/tasks_tab/")
     WebDriverWait(driver, 20).until(
         EC.element_to_be_clickable((By.XPATH,
         "/html/body/div[1]/div[2]/div[2]/div[3]/div/div/table/tbody/tr/td[6]/button[4]"))
@@ -56,12 +57,13 @@ def renew_webapp(user_varname: str, password_varname: str):
     username = driver.find_element(by=By.ID, value="id_auth-username")
     pwd = driver.find_element(by=By.ID, value="id_auth-password")
     nxt = driver.find_element(by=By.ID, value="id_next")
-    username.send_keys(os.getenv(user_varname))
+    user = os.getenv(user_varname)
+    username.send_keys(user)
     pwd.send_keys(os.getenv(password_varname))
     nxt.click()
 
     # Navigate to web tab
-    driver.get("https://www.pythonanywhere.com/user/talzaken/webapps/#tab_id_talzaken_pythonanywhere_com")
+    driver.get(f"https://www.pythonanywhere.com/user/{user}/webapps/#tab_id_{user}_pythonanywhere_com")
 
     # click extend button
     extend_button = driver.find_element(by=By.CLASS_NAME, value='webapp_extend')
